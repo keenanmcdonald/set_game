@@ -8,21 +8,12 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     var model = SetGame()
 
     var body: some View {
-        VStack{
-            Group{
-                CardView(card: model.deck[0])
-                CardView(card: model.deck[1])
-                CardView(card: model.deck[2])
-                CardView(card: model.deck[3])
-                CardView(card: model.deck[4])
-                CardView(card: model.deck[5])
-                CardView(card: model.deck[6])
-            }
+        Grid(model.deck) { card in
+            CardView(card: card)
         }
     }
 }
@@ -30,25 +21,58 @@ struct ContentView: View {
 struct CardView: View {
     var card: SetGame.Card
     
+    //move these somewhere else!!
+    var colors = [Color.red, Color.green, Color.blue]
+
+    var number: Int
+    var color: Color
+    var opacity: Double
+    var shape: cardShape?
+    
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
+            RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 1.0).padding(1.0)
             HStack{
-                ForEach(0..<card.number){_ in
-                    if (self.card.shape == SetGame.Shape.rectangle){
-                        Rectangle().fill(self.card.color).aspectRatio(0.5, contentMode: ContentMode.fit)
+                
+                if (self.shape == cardShape.rectangle){
+                    ForEach(0..<self.number, id: \.self){_ in
+                        ZStack{
+                            Rectangle().stroke(self.color)
+                            Rectangle().fill(self.color).opacity(self.opacity)
+                        }.aspectRatio(0.5, contentMode: ContentMode.fit)
                     }
-                    else if (self.card.shape == SetGame.Shape.oval){
-                        Capsule().fill(self.card.color).aspectRatio(0.5, contentMode: ContentMode.fit)
-                    }
-                    else{
-                        
-                    }
-                    
                 }
-            }
-        }
+                else if (self.shape == cardShape.oval){
+                    ForEach(0..<self.number, id: \.self){_ in
+                        ZStack{
+                            Capsule().stroke(self.color)
+                            Capsule().fill(self.color).opacity(self.opacity)
+                        }.aspectRatio(0.5, contentMode: ContentMode.fit)
+                    }
+                }
+                else {
+                    ForEach(0..<self.number, id: \.self){_ in
+                        ZStack{
+                            Diamond().stroke(self.color)
+                            Diamond().fill(self.color).opacity(self.opacity)
+                        }.aspectRatio(0.5, contentMode: ContentMode.fit)
+                    }
+                }
+            }.padding(8.0)
+        }.aspectRatio(1.8, contentMode: ContentMode.fit)
     }
+    
+    init(card: SetGame.Card){
+        self.card = card
+        number = card.traits[0]+1
+        color = colors[card.traits[1]]
+        opacity = Double(card.traits[2]) * 0.5
+        shape = cardShape(rawValue: card.traits[3])
+    }
+}
+
+enum cardShape: Int {
+    case rectangle, diamond, oval
 }
 
 struct ContentView_Previews: PreviewProvider {

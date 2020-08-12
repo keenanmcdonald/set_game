@@ -14,16 +14,16 @@ struct SetGame{
     var score = 0
         
     func doesMatch(cards: Array<Card>) -> Bool {
-        if ((cards[0].color == cards[1].color && cards[0].color == cards[1].color) || (cards[0].color != cards[1].color && cards[0].color != cards[2].color && cards[1].color != cards[2].color)){
-            if ((cards[0].number == cards[1].number && cards[0].number == cards[1].number) || (cards[0].number != cards[1].number && cards[0].number != cards[2].number && cards[1].number != cards[2].number)){
-                if ((cards[0].shading == cards[1].shading && cards[0].shading == cards[1].shading) || (cards[0].shading != cards[1].shading && cards[0].shading != cards[2].shading && cards[1].shading != cards[2].shading)){
-                    if ((cards[0].shape == cards[1].shape && cards[0].shape == cards[1].shape) || (cards[0].shape != cards[1].shape && cards[0].shape != cards[2].shape && cards[1].shape != cards[2].shape)){
-                        return true
-                    }
-                }
+        for trait in 0..<4{
+            if !((cards[0].traits[trait] == cards[1].traits[trait]
+                    && cards[0].traits[trait] == cards[1].traits[trait])
+                || (cards[0].traits[trait] != cards[1].traits[trait]
+                    && cards[0].traits[trait] != cards[2].traits[trait]
+                    && cards[1].traits[trait] != cards[2].traits[trait])) {
+                return false
             }
         }
-        return false
+        return true
     }
     
     init(){
@@ -41,40 +41,18 @@ struct SetGame{
     }
 
     
-    struct Card{
+    struct Card : Identifiable {
         var isSelected: Bool = false
-        var number: Int
-        var color: Color
-        var shading: Shade
-        var shape: Shape
-        var colors: Array<Color> = [Color.red, Color.green, Color.blue]
+        var id: Int
+        var traits: Array<Int> = []
         
         init(index: Int){
-            
-            self.number = (index % 3)+1
-            var val = index / 3
-            self.color = colors[val % 3]
-            val = index / 3
-            self.shading = Shade(rawValue: val % 3) ?? Shade.none
-            val = index / 3
-            self.shape = Shape(rawValue: val % 3) ?? Shape.rectangle
+            self.id = index
+            var value = index
+            for _ in 0..<4 {
+                self.traits.append(value % 3)
+                value = value / 3
+            }
         }
-    }
-    
-    
-    enum Shade: Int{
-        case none, light, dark
-    }
-    enum Shape: Int{
-        case rectangle, oval, diamond
-    }
-    
-}
-
-
-
-struct SetModel_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

@@ -1,8 +1,8 @@
 //
 //  Grid.swift
-//  set_game
+//  Memorize
 //
-//  Created by Keenan McDonald on 8/11/20.
+//  Created by Keenan McDonald on 7/5/20.
 //  Copyright © 2020 Keenan McDonald. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View{
         self.items = items
         self.viewForItem = viewForItem
     }
-    
+        
     var body: some View {
         GeometryReader { geometry in
             self.body(for: GridLayout(itemCount: self.items.count, in: geometry.size))
@@ -30,7 +30,7 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View{
     }
     
     func body(for item: Item, in layout: GridLayout) -> some View {
-        let index = items.firstIndex(matching: item)
+        let index = items.firstIndex(where: {$0.id == item.id})
         return viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
             .position(layout.location(ofItemAt: index!))
