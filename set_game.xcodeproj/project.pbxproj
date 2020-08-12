@@ -15,6 +15,8 @@
 		063473EC24E351AE008C82AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 063473EA24E351AE008C82AC /* LaunchScreen.storyboard */; };
 		063473F724E351AF008C82AC /* set_gameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063473F624E351AF008C82AC /* set_gameTests.swift */; };
 		0634740224E351AF008C82AC /* set_gameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634740124E351AF008C82AC /* set_gameUITests.swift */; };
+		0634741024E351F5008C82AC /* SetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634740F24E351F4008C82AC /* SetModel.swift */; };
+		0634741424E366C7008C82AC /* DiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0634741324E366C7008C82AC /* DiamondView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		063473FD24E351AF008C82AC /* set_gameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = set_gameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0634740124E351AF008C82AC /* set_gameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_gameUITests.swift; sourceTree = "<group>"; };
 		0634740324E351AF008C82AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0634740F24E351F4008C82AC /* SetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModel.swift; sourceTree = "<group>"; };
+		0634741324E366C7008C82AC /* DiamondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		063473DE24E351A8008C82AC /* set_game */ = {
 			isa = PBXGroup;
 			children = (
+				0634740F24E351F4008C82AC /* SetModel.swift */,
 				063473DF24E351A8008C82AC /* AppDelegate.swift */,
 				063473E124E351A8008C82AC /* SceneDelegate.swift */,
 				063473E324E351A8008C82AC /* ContentView.swift */,
@@ -106,6 +111,7 @@
 				063473EA24E351AE008C82AC /* LaunchScreen.storyboard */,
 				063473ED24E351AE008C82AC /* Info.plist */,
 				063473E724E351AE008C82AC /* Preview Content */,
+				0634741324E366C7008C82AC /* DiamondView.swift */,
 			);
 			path = set_game;
 			sourceTree = "<group>";
@@ -268,7 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				063473E024E351A8008C82AC /* AppDelegate.swift in Sources */,
+				0634741424E366C7008C82AC /* DiamondView.swift in Sources */,
 				063473E224E351A8008C82AC /* SceneDelegate.swift in Sources */,
+				0634741024E351F5008C82AC /* SetModel.swift in Sources */,
 				063473E424E351A8008C82AC /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
